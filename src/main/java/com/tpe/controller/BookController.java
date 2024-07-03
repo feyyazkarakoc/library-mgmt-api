@@ -83,14 +83,14 @@ public class BookController {
                                                           @RequestParam("size") int size,
                                                           @RequestParam("sort") String sortBy,
                                                           @RequestParam("direction") Sort.Direction direction) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sortBy));
+        Pageable pageable = PageRequest.of(page-1, size, Sort.by(direction, sortBy));
         Page<Book> bookWithPagge = bookService.getAllBookWithPage(pageable);
 
         return ResponseEntity.ok(bookWithPagge);
     }
 
 
-    //http://localhost:8080/books/a?author=J.London
+    //http://localhost:8080/books/a?author=Tolstoy
     @GetMapping("/a")
     public ResponseEntity<List<Book>> getBooksbyAuthor(@RequestParam("author") String author) {
         List<Book> bookList = bookService.getBooksByAuthor(author);
@@ -98,7 +98,7 @@ public class BookController {
     }
 
 
-    //http://localhost:8080/books/filter?author=J.London&pubDate=1900 + GET
+    //http://localhost:8080/books/filter?author=Tolstoy&pubDate=1900 + GET
     @GetMapping("/filter")
     public ResponseEntity<List<Book>> filterByAuthorAndPublicationDate(@RequestParam("author") String author, @RequestParam("pubDate") String pubDate) {
         List<Book> bookList = bookService.findBooksByAuthorAndPubDate(author, pubDate);
@@ -106,7 +106,7 @@ public class BookController {
 
     }
 
-    //http://localhost:8080/books/filter/native?author=J.London&pubDate=1900 + GET
+    //http://localhost:8080/books/filter/native?author=Tolstoy&pubDate=1900 + GET
     @GetMapping("/filter/native")
     public ResponseEntity<List<Book>> filterByAuthorAndPublicationDateWithNativeSQL(@RequestParam("author") String author, @RequestParam("pubDate") String pubDate) {
         List<Book> bookList = bookService.findBooksByAuthorAndPubDateWithNativeSQL(author, pubDate);
@@ -115,7 +115,7 @@ public class BookController {
     }
 
 
-    //http://localhost:8080/books/search/a?author=J.London&pubDate=1900 + GET
+    //http://localhost:8080/books/search/a?author=Tolstoy&pubDate=1900 + GET
     @GetMapping("/search/a")
     public ResponseEntity<List<Book>> filterByAuthorAndPublicationDateWithHQL(@RequestParam("author") String author, @RequestParam("pubDate") String pubDate) {
         List<Book> bookList = bookService.findBooksByAuthorAndPubDateWithHQL(author, pubDate);

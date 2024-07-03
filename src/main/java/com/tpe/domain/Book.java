@@ -1,6 +1,7 @@
 package com.tpe.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,6 +35,10 @@ public class Book {
 
     @Column(nullable = false)
     private String publicationDate;
+
+    @ManyToMany
+    @JsonIgnore
+    private Owner owner;
 
     @Override
     public String toString() {
