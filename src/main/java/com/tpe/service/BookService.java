@@ -3,7 +3,7 @@ package com.tpe.service;
 
 import com.tpe.domain.Book;
 import com.tpe.dto.BookDTO;
-import com.tpe.exceptions.BookNotFoundException;
+import com.tpe.exceptions.ResourceNotFoundException;
 import com.tpe.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,7 +29,7 @@ public class BookService {
 
     public Book getBookById(Long identity) {
         return bookRepository.findById(identity).
-                orElseThrow(() -> new BookNotFoundException("Book not found by ID : " + identity));
+                orElseThrow(() -> new ResourceNotFoundException("Book not found by ID : " + identity));
     }
 
     public void deleteBookById(Long id) {
@@ -60,7 +60,7 @@ public class BookService {
     public List<Book> getBooksByAuthor(String author) {
         List<Book> bookList = bookRepository.findByAuthorWithJPQL(author);
         if (bookList.isEmpty()) {
-            throw new BookNotFoundException("No books found for the given author!");
+            throw new ResourceNotFoundException("No books found for the given author!");
         }
         return bookList;
     }

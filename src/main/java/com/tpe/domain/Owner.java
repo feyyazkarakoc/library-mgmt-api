@@ -1,10 +1,12 @@
 package com.tpe.domain;
 
+import com.tpe.dto.OwnerDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ import java.util.List;
 @Table(name = "t_owner")
 @Getter
 @Setter
+@NoArgsConstructor
 public class Owner {
 
     @Id
@@ -42,4 +45,13 @@ public class Owner {
 
     @OneToMany(mappedBy = "owner")
     private List<Book> bookList = new ArrayList<>();
+
+    public Owner(OwnerDTO ownerDTO){
+        this.name= ownerDTO.getName();
+        this.lastName= ownerDTO.getLastName();
+        this.phoneNumber= ownerDTO.getPhoneNumber();
+        this.email= ownerDTO.getName();
+
+
+    }
 }
