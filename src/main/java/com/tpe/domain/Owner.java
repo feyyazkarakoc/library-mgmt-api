@@ -27,7 +27,7 @@ public class Owner {
 
 
     @NotBlank(message = "Please provide a valid name!")
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false)
     private String name;
 
     @NotBlank(message = "Please provide a valid last name!")
@@ -37,7 +37,7 @@ public class Owner {
     private String phoneNumber;
 
     @Email(message = "Please provide a valid email!")
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String email;
 
     @Setter(AccessLevel.NONE)
@@ -50,7 +50,7 @@ public class Owner {
         this.name= ownerDTO.getName();
         this.lastName= ownerDTO.getLastName();
         this.phoneNumber= ownerDTO.getPhoneNumber();
-        this.email= ownerDTO.getName();
+        this.email= ownerDTO.getEmail();
 
 
     }

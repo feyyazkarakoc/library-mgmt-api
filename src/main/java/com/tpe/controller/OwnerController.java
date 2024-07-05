@@ -53,7 +53,7 @@ public class OwnerController {
 
     //Delete an Owner By ID
     //http://localhost:8080/owners/2 + DELETE
-    @DeleteMapping("/id")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOwner(@PathVariable("id") Long id){
         ownerService.deleteOwnerById(id);
         return ResponseEntity.ok("The owner was successfully deleted.");
