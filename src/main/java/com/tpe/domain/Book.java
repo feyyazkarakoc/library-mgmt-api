@@ -36,7 +36,7 @@ public class Book {
     @Column(nullable = false)
     private String publicationDate;
 
-    @ManyToMany
+    @ManyToOne
     @JsonIgnore
     private Owner owner;
 

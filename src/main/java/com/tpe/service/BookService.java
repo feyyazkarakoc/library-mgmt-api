@@ -60,22 +60,43 @@ public class BookService {
     public List<Book> getBooksByAuthor(String author) {
         List<Book> bookList = bookRepository.findByAuthorWithJPQL(author);
         if (bookList.isEmpty()) {
-            throw new ResourceNotFoundException("No books found for the given author!");
+            throw new ResourceNotFoundException("No books found!");
         }
         return bookList;
     }
 
     public List<Book> findBooksByAuthorAndPubDate(String author, String pubDate) {
-        return bookRepository.findByAuthorAndPublicationDate(author, pubDate);
+        List<Book> bookList =  bookRepository.findByAuthorAndPublicationDate(author, pubDate);
+        if (bookList.isEmpty()) {
+            throw new ResourceNotFoundException("No books found!");
+        }
+        return bookList;
     }
 
 
     public List<Book> findBooksByAuthorAndPubDateWithNativeSQL(String author, String pubDate) {
-        return bookRepository.findByAuthorAndPublicationDateWithNativeSQL(author, pubDate);
+        List<Book> bookList =  bookRepository.findByAuthorAndPublicationDateWithNativeSQL(author, pubDate);
+        if (bookList.isEmpty()) {
+            throw new ResourceNotFoundException("No books found!");
+        }
+        return bookList;
     }
 
     public List<Book> findBooksByAuthorAndPubDateWithHQL(String author, String pubDate) {
-        return bookRepository.findByAuthorAndPublicationDateWithHQL(author, pubDate);
+        List<Book> bookList =  bookRepository.findByAuthorAndPublicationDateWithHQL(author, pubDate);
+        if (bookList.isEmpty()) {
+            throw new ResourceNotFoundException("No books found!");
+        }
+        return bookList;
 
+    }
+
+    public List<Book> getBooksByTitleWithPattern(String searchPattern) {
+        searchPattern="%"+searchPattern+"%";
+        List<Book> bookList =  bookRepository.findBooksByTitleWithPattern(searchPattern);
+        if (bookList.isEmpty()) {
+            throw new ResourceNotFoundException("No books found!");
+        }
+        return bookList;
     }
 }

@@ -24,4 +24,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(value = "FROM Book b WHERE b.author=:pAuthor AND b.publicationDate=:pPubDate")
     List<Book> findByAuthorAndPublicationDateWithHQL(@Param("pAuthor") String author, @Param("pPubDate") String pubDate);
 
+    @Query(value = "SELECT * FROM t_book  WHERE title ILIKE :pSearchPattern",nativeQuery = true)
+    List<Book> findBooksByTitleWithPattern(@Param("pSearchPattern") String searchPattern);
+
 }
