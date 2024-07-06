@@ -91,7 +91,7 @@ public class BookController {
                                                           @RequestParam("size") int size,
                                                           @RequestParam("sort") String sortBy,
                                                           @RequestParam("direction") Sort.Direction direction) {
-        Pageable pageable = PageRequest.of(page-1, size, Sort.by(direction, sortBy));
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(direction, sortBy));
         Page<Book> bookWithPagge = bookService.getAllBookWithPage(pageable);
 
         return ResponseEntity.ok(bookWithPagge);
@@ -139,26 +139,20 @@ public class BookController {
     //Get Books By Its Title Which Contains a Pattern
     //http://localhost:8080/books/filterbook?searchpattern=Eden + GET
     @GetMapping("/filterbook")
-    public ResponseEntity<List<Book>> getBooksByTitleWithPattern(@RequestParam("searchpattern") String searchPattern){
+    public ResponseEntity<List<Book>> getBooksByTitleWithPattern(@RequestParam("searchpattern") String searchPattern) {
         List<Book> bookList = bookService.getBooksByTitleWithPattern(searchPattern);
-        return new ResponseEntity<>(bookList,HttpStatus.OK);
+        return new ResponseEntity<>(bookList, HttpStatus.OK);
     }
-
-
-
 
 
     //Add a Book to an Owner
     //http://localhost:8080/books/add?book=3&owner=1 + PATCH
     @PatchMapping("/add")
     public ResponseEntity<String> addBookToOwner(@RequestParam("book") Long bookID,
-                                                 @RequestParam("owner") Long ownerID){
-        bookService.addBookToOwner(bookID,ownerID);
+                                                 @RequestParam("owner") Long ownerID) {
+        bookService.addBookToOwner(bookID, ownerID);
         return ResponseEntity.ok("Book successfully assigned to owner.");
     }
-
-
-
 
 
 }

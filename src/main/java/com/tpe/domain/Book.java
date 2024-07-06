@@ -29,8 +29,8 @@ public class Book {
 
 
     @NotBlank(message = "Author name cannot be empty!")
-    @Size(min = 2,max = 30,message ="Author name (${validatedValue})  must be between {min} and {max} characters!")
-    @Column(length = 30,nullable = false)
+    @Size(min = 2, max = 30, message = "Author name (${validatedValue})  must be between {min} and {max} characters!")
+    @Column(length = 30, nullable = false)
     private String author;
 
     @Column(nullable = false)

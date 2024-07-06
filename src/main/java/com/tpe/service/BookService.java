@@ -108,8 +108,6 @@ public class BookService {
     }
 
 
-
-
     public void addBookToOwner(Long bookID, Long ownerID) {
 
        /* Book foundBook = getBookById(bookID);
@@ -129,7 +127,8 @@ public class BookService {
         Book foundBook = getBookById(bookID);
         Owner foundOwner = ownerService.getOwnerById(ownerID);
         boolean isBookExist = foundOwner.getBookList().stream().
-                anyMatch(book -> book.getId().equals(bookID));
+                anyMatch(book -> book.getId().equals(foundBook.getId()));
+
         if (isBookExist) {
             throw new ConflictException("This book already exists in the user's list!");
         } else if (foundBook.getOwner() != null) {
