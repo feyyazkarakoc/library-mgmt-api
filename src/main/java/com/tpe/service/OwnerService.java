@@ -6,9 +6,9 @@ import com.tpe.domain.Owner;
 import com.tpe.dto.OwnerDTO;
 import com.tpe.exceptions.ConflictException;
 import com.tpe.exceptions.ResourceNotFoundException;
-import com.tpe.repository.BookRepository;
 import com.tpe.repository.OwnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +20,8 @@ public class OwnerService {
     private OwnerRepository ownerRepository;
 
     @Autowired
-    private BookRepository bookRepository;
+    @Lazy
+    private BookService bookService;
 
     public void saveOwner(OwnerDTO ownerDTO) {
         Boolean isExist = ownerRepository.existsByEmail(ownerDTO.getEmail());
@@ -63,7 +64,7 @@ public class OwnerService {
         Owner existingOwner = getOwnerById(id);
         for (Book book : existingOwner.getBookList()) {
             book.setOwner(null);
-            bookRepository.save(book);
+            bookService.saveBook(book);
         }
         ownerRepository.delete(existingOwner);
     }

@@ -150,6 +150,12 @@ public class BookController {
 
     //Add a Book to an Owner
     //http://localhost:8080/books/add?book=3&owner=1 + PATCH
+    @PatchMapping("/add")
+    public ResponseEntity<String> addBookToOwner(@RequestParam("book") Long bookID,
+                                                 @RequestParam("owner") Long ownerID){
+        bookService.addBookToOwner(bookID,ownerID);
+        return ResponseEntity.ok("Book successfully assigned to owner.");
+    }
 
 
 
